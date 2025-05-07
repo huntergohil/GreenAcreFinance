@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Stocks - JAllan Stonks</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <a href="account.html" class="account-link" title="Your Account">
+    <img src="https://cdn-icons-png.flaticon.com/512/456/456283.png" alt="Account" class="account-icon" />
+  </a>  
+</head>
+<body>
+
+<!-- Navigation -->
+<header class="nav-buttons" style="text-align:center; margin-top: 2em;">
+  <a href="../index.html" class="btn">Home</a>
+</header>
+
+<h1 style="text-align:center;">My Portfolio</h1>
+
+<!-- Stocks Content -->
+<div class="portfolio-section">
+  <p style="text-align:center;">Your stocks! Here you can manage, buy, and sell your stocks!</p>
+  
+  <div class="stock-list">
+    <a href="manage.html?symbol=NVDA" class="stock-link">
+      <div class="stock-card">
+        <h3>NVDA</h3>
+        <p>📈 Gain: <span class="gain">+18.4%</span></p>
+        <p>🔍 AI Forecast: 84% bullish</p>
+        <p>✅ AI Recommendation: Heavily Invest</p>
+      </div>
+    </a>
+
+    <a href="manage.html?symbol=TSLA" class = "stock-link">
+      <div class="stock-card">
+      <h3>TSLA</h3>
+      <p>📉 Loss: <span class="loss">-6.2%</span></p>
+      <p>🔍 AI Forecast: 53% bearish</p>
+      <p>✅ AI Recommendation: Moderately Sell</p>
+      </div>
+    </a>
+    <a href="manage.html?symbol=GOOGL" class = "stock-link">
+      <div class="stock-card">
+        <h3>GOOGL</h3>
+        <p>📈 Gain: <span class="gain">+11.7%</span></p>
+        <p>🔍 AI Forecast: 76% bullish</p>
+        <p>✅ AI Recommendation: Heavily Invest</p>
+      </div>
+    </a>
+    <a href="manage.html?symbol=MSFT" class = "stock-link">
+      <div class="stock-card">
+        <h3>MSFT</h3>
+        <p>📈 Gain: <span class="gain">+9.9%</span></p>
+        <p>🔍 AI Forecast: 68% bullish</p>
+        <p>✅ AI Recommendation: Moderately Invest</p>
+      </div>
+    </a>
+    <a href="manage.html?symbol=AMZN" class = "stock-link">
+      <div class="stock-card">
+        <h3>AMZN</h3>
+        <p>📉 Loss: <span class="loss">-2.8%</span></p>
+        <p>🔍 AI Forecast: 64% neutral</p>
+        <p>✅ AI Recommendation: Hold</p>
+      </div>
+    </a>
+    <a href="manage.html?symbol=SPY" class = "stock-link">
+      <div class="stock-card">
+        <h3>SPY</h3>
+        <p>📈 Gain: <span class="gain">+6.5%</span></p>
+        <p>🔍 AI Forecast: 20% Bearish</p>
+        <p>✅ AI Recommendation: Heavily Sell</p>
+      </div>
+    </a>
+  </div>
+</div>
+
+</div>
+
+<!-- Recommended Stocks Section -->
+<div class="portfolio-section">
+  <h2 style="text-align:center;">Recommended Stocks</h2>
+  <p style="text-align:center;">Top 3 stocks our AI suggests buying right now:</p>
+
+  <div class="stock-list">
+    <a href="manage.html?symbol=SMCI" class = "stock-link">
+      <div class="stock-card">
+        <h3>SMCI</h3>
+        <p>📈 Forecast: <span class="gain">+22.1%</span></p>
+        <p>🔍 AI Sentiment: 89% bullish</p>
+        <p>✅ Suggestion: Strong Buy</p>
+      </div>
+    </a>
+    <a href="manage.html?symbol=AVGO" class = "stock-link">
+      <div class="stock-card">
+        <h3>AVGO</h3>
+        <p>📈 Forecast: <span class="gain">+17.3%</span></p>
+        <p>🔍 AI Sentiment: 81% bullish</p>
+        <p>✅ Suggestion: Buy</p>
+      </div>
+    </a>
+    <a href="manage.html?symbol=NFLX" class = "stock-link">
+      <div class="stock-card">
+        <h3>NFLX</h3>
+        <p>📈 Forecast: <span class="gain">+15.0%</span></p>
+        <p>🔍 AI Sentiment: 77% bullish</p>
+        <p>✅ Suggestion: Moderate Buy</p>
+      </div>
+  </div>
+</div>
+
+
+<script>
+  document.querySelector(".btn").addEventListener("click", function() {
+    document.getElementById("onboardModal").style.display = "none";
+  });
+</script>
+
+</body>
+</html>

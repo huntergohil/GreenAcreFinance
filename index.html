@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Green Acre</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+
+  <header>
+    <h1>Welcome to <span class="highlight">Green Acre Finance</span></h1>
+    <div class="nav-buttons">
+      <a href="pages/stocks.html" class="btn">View My Stocks</a>
+      <a href="pages/about.html" class="btn">About Us</a>
+      <a href="pages/account.html" class="account-link" title="Your Account">
+        <img src="https://cdn-icons-png.flaticon.com/512/456/456283.png" alt="Account" class="account-icon" />
+      </a>      
+    </div>
+  </header>
+
+  <main>
+    <!-- Latest News -->
+    <section class="section">
+      <h2>Latest News</h2>
+      <div class="cards">
+        <a href="pages/news.html" class="card" style="text-decoration: none; color: inherit;">Microsoft invents consumer quality quantum computer!</a>
+        <a href="pages/news.html" class="card" style="text-decoration: none; color: inherit;">Latest Job Reports!</a>
+        <a href="pages/news.html" class="card" style="text-decoration: none; color: inherit;">Cure for cancer approved!</a>
+        <a href="pages/news.html" class="card" style="text-decoration: none; color: inherit;">Oil prices plummet</a>
+      </div>
+    </section>
+
+    <!-- Trending Stocks -->
+    <section class="section">
+      <h2>Trending Stocks</h2>
+      <div class="cards">
+        <div class="card">Microsoft 📈32%</div>
+        <div class="card">Gamestop 📉46%</div>
+        <div class="card">Apple 📈12%</div>
+        <div class="card">Amazon 📈9%</div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Dismiss modal
+    document.querySelector(".btn").addEventListener("click", function() {
+      document.getElementById("onboardModal").style.display = "none";
+    });
+  </script>
+
+</body>
+</html>
