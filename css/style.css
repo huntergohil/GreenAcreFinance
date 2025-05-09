@@ -165,3 +165,10 @@ h1, h2 {
 .stock-link * {
   text-decoration: none !important;
 }
+input, select {
+  width: 100%;
+  font-size: 1em;
+  padding: 0.5em;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}

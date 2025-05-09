@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Trade Stock - Green Acre Finance</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<header class="nav-buttons">
+  <a href="stocks.html" class="btn">⬅️ Return to Portfolio</a>
+</header>
+
+<h1 style="text-align:center;">Trade Stock</h1>
+
+<section class="section">
+  <form id="trade-form" style="display: flex; flex-direction: column; gap: 1.2em; max-width: 480px; margin: 2em auto;">
+    <label>
+      <strong>Stock Symbol</strong>
+      <input type="text" id="trade-symbol" readonly />
+    </label>
+    <label>
+      <strong>Quantity</strong>
+      <input type="number" id="trade-qty" min="1" value="1" />
+    </label>
+    <label>
+      <strong>Order Type</strong>
+      <select id="trade-type">
+        <option value="buy">Buy</option>
+        <option value="sell">Sell</option>
+      </select>
+    </label>
+    <button type="submit" class="btn">📈 Simulate Trade</button>
+  </form>
+
+  <div id="trade-log" style="margin-top: 2em; text-align: center;"></div>
+</section>
+
+<section class="section">
+  <h2 style="text-align:center;">📊 Stock Price History</h2>
+  <canvas id="historyChart" height="120" style="margin-top: 2em;"></canvas>
+</section>
+
+<script>
+    const params = new URLSearchParams(window.location.search);
+    const symbol = params.get('symbol') || 'NVDA';
+    const priceMap = {
+      "NVDA": 735, "TSLA": 242, "GOOGL": 138,
+      "MSFT": 330, "AMZN": 125, "SPY": 412
+    };
+    const currentPrice = priceMap[symbol] || 100;
+    document.getElementById('trade-symbol').value = symbol;
+  
+    document.getElementById('trade-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+  
+      const qty = parseInt(document.getElementById('trade-qty').value);
+      const type = document.getElementById('trade-type').value;
+      const now = new Date().toLocaleTimeString();
+  
+      let owned = parseInt(localStorage.getItem(`owned_${symbol}`) || "0");
+      let avgPrice = parseFloat(localStorage.getItem(`avgPrice_${symbol}`) || "0");
+  
+      let message = "";
+  
+      if (type === "sell") {
+        if (qty > owned) {
+          message = `
+            <div class="card" style="background: #fcebd7;">
+              <h3>❌ Trade Blocked</h3>
+              <p>You only own ${owned} share(s) of ${symbol}.</p>
+              <p>Cannot sell ${qty}.</p>
+            </div>`;
+        } else {
+          owned -= qty;
+          localStorage.setItem(`owned_${symbol}`, owned);
+          message = `
+            <div class="card" style="background: #edf8ef;">
+              <h3>✅ Sell Executed</h3>
+              <p>Sold ${qty} share(s) of ${symbol} at $${currentPrice}</p>
+              <p style="color: gray;">${now}</p>
+            </div>`;
+        }
+      } else if (type === "buy") {
+        const totalCost = avgPrice * owned + currentPrice * qty;
+        owned += qty;
+        avgPrice = totalCost / owned;
+  
+        localStorage.setItem(`owned_${symbol}`, owned);
+        localStorage.setItem(`avgPrice_${symbol}`, avgPrice.toFixed(2));
+  
+        message = `
+          <div class="card" style="background: #edf8ef;">
+            <h3>✅ Buy Executed</h3>
+            <p>Bought ${qty} share(s) of ${symbol} at $${currentPrice}</p>
+            <p style="color: gray;">${now}</p>
+          </div>`;
+      }
+  
+      document.getElementById('trade-log').innerHTML = message;
+    });
+  
+    // Chart logic
+    const labels = ["Mon", "Tue", "Wed", "Thu", "Fri"];
+    const data = {
+      labels: labels,
+      datasets: [{
+        label: `${symbol} Price`,
+        data: [currentPrice - 20, currentPrice - 10, currentPrice, currentPrice + 5, currentPrice + 8],
+        borderColor: '#2e633f',
+        backgroundColor: 'rgba(46, 99, 63, 0.08)',
+        fill: true,
+        tension: 0.3,
+        pointRadius: 3,
+        pointHoverRadius: 5
+      }]
+    };
+  
+    new Chart(document.getElementById('historyChart'), {
+      type: 'line',
+      data: data,
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: false },
+          tooltip: { mode: 'index', intersect: false }
+        },
+        scales: {
+          y: { beginAtZero: false },
+          x: { grid: { display: false } }
+        }
+      }
+    });
+  </script>
+  
+
+</body>
+</html>
