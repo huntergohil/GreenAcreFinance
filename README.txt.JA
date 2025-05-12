@@ -1,0 +1,15 @@
+I am Jack, founder of GAF
+
+I am no expert in code, so i am using outside support and tailoring it to our specifications to support the creation of our POC prior to funding. 
+This branch was created to provide insight/actionable servicing of our concept and to support our primary tech lead Hunter with the process. 
+It may be entirely useless. 
+
+Purpose ! 
+
+For reference - an example prompt may be "how does a likely coming change in US interest rates influence the pricing of Norwegian firm Equinor"
+
+The notebook is designed to:
+- Ingest **real macro and market data** (NewsAPI + Yahoo Finance)
+- Train a basic **Random Forest** regression model
+- Generate **automated investment insights** (e.g., sentiment, geopolitical risk)
+- Explore how macroeconomic factors (like U.S. interest rate hikes) affect offshore energy firms (e.g., Equinor, DNO)
