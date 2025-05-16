@@ -1,10 +1,8 @@
-/* === Green Acre Finance — Darker Forest Green Theme === */
-
 body {
   margin: 0;
   font-family: 'Segoe UI', 'Inter', sans-serif;
-  background-color: #2e633f; /* Forest Green */
-  color: #fdfdfd; /* Snow White */
+  background-color: #2e633f; 
+  color: #fdfdfd; 
   line-height: 1.65;
   letter-spacing: 0.4px;
   scroll-behavior: smooth;
@@ -32,7 +30,7 @@ h1, h2 {
   width: 90%;
   max-width: 960px;
   border-radius: 20px;
-  background-color: #a1b99a; /* Sage Green */
+  background-color: #a1b99a; 
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
   color: #2e633f;
 }
@@ -43,7 +41,7 @@ h1, h2 {
   font-size: 1em;
   border: none;
   border-radius: 40px;
-  background: #fdfdfd; /* Snow White */
+  background: #fdfdfd;
   color: #2e633f;
   font-weight: 700;
   box-shadow: 0 4px 10px rgba(255, 255, 255, 0.15);
@@ -53,7 +51,7 @@ h1, h2 {
 }
 
 .btn:hover {
-  background: #edf8ef; /* Mint Cream */
+  background: #edf8ef; 
   color: #2e633f;
   box-shadow: 0 8px 18px rgba(255, 255, 255, 0.2);
 }
@@ -69,8 +67,8 @@ h1, h2 {
 .card {
   flex: 1 1 300px;
   padding: 1.5em;
-  background: #f7f6df; /* Linen */
-  border: 1px solid #d8d8d8; /* Warm Gray */
+  background: #f7f6df; 
+  border: 1px solid #d8d8d8; 
   border-radius: 16px;
   box-shadow: 0 4px 18px rgba(0, 0, 0, 0.15);
   color: #2e633f;

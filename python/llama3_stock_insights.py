@@ -68,7 +68,6 @@ def extract_json_blocks(text):
         # Remove "Here is the JSON object:" if it appears
         text = text.replace("Here is the JSON object:", "").strip()
 
-        # Now parse clean JSON
         data = json.loads(text)
         return {
             "topStories.json": data.get("topStories", []),
@@ -77,7 +76,7 @@ def extract_json_blocks(text):
         }
 
     except json.JSONDecodeError as e:
-        print("❌ JSON parsing failed.\n")
+        print("JSON parsing failed.\n")
         print(text)
         return {}
 

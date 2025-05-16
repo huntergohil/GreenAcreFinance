@@ -28,7 +28,7 @@ for article in articles:
 with open("news_headlines.json", "w") as f:
     json.dump(news_data, f, indent=2)
 
-print("✅ Exported headlines to news_headlines.json")
+print("Exported headlines to news_headlines.json successfully")
 
 #There are a few dependencies that must be installed for this script to run properly 
 #lxml_html_clean
