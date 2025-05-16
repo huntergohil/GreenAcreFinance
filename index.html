@@ -8,7 +8,6 @@
 </head>
 <body>
 
-
   <header>
     <h1>Welcome to <span class="highlight">B4Info</span></h1>
     <h2>Tomorrow's Trades Happen Today</h2>
@@ -26,10 +25,7 @@
     <section class="section">
       <h2>Latest News</h2>
       <div class="cards">
-        <a href="pages/news.html" class="card" style="text-decoration: none; color: inherit;">Microsoft invents consumer quality quantum computer!</a>
-        <a href="pages/news.html" class="card" style="text-decoration: none; color: inherit;">Latest Job Reports!</a>
-        <a href="pages/news.html" class="card" style="text-decoration: none; color: inherit;">Cure for cancer approved!</a>
-        <a href="pages/news.html" class="card" style="text-decoration: none; color: inherit;">Oil prices plummet</a>
+        <!-- News will be loaded here -->
       </div>
     </section>
 
@@ -37,20 +33,50 @@
     <section class="section">
       <h2>Trending Stocks</h2>
       <div class="cards">
-        <div class="card">Microsoft 📈32%</div>
-        <div class="card">Gamestop 📉46%</div>
-        <div class="card">Apple 📈12%</div>
-        <div class="card">Amazon 📈9%</div>
+        <!-- Stocks will be loaded here -->
       </div>
     </section>
   </main>
 
   <script>
-    // Dismiss modal
-    document.querySelector(".btn").addEventListener("click", function() {
-      document.getElementById("onboardModal").style.display = "none";
-    });
+    async function loadHomepageData() {
+      try {
+        const storiesRes = await fetch('./python/topStories.json');
+        const stocksRes = await fetch('./python/topStocks.json');
+        const topStories = await storiesRes.json();
+        const topStocks = await stocksRes.json();
+  
+        // Populate Latest News
+        const newsContainer = document.querySelector("section:nth-of-type(1) .cards");
+        newsContainer.innerHTML = "";
+        topStories.forEach(story => {
+          const a = document.createElement("a");
+          a.href = story.link;
+          a.className = "card";
+          a.style.textDecoration = "none";
+          a.style.color = "inherit";
+          a.target = "_blank";
+          a.textContent = story.title;
+          newsContainer.appendChild(a);
+        });
+  
+        // Populate Trending Stocks
+        const trendingContainer = document.querySelector("section:nth-of-type(2) .cards");
+        trendingContainer.innerHTML = "";
+        topStocks.forEach(stock => {
+          const div = document.createElement("div");
+          div.className = "card";
+          div.textContent = `${stock.ticker} 📈${stock.forecast}`;
+          trendingContainer.appendChild(div);
+        });
+      } catch (error) {
+        console.error("Failed to load JSON files:", error);
+      }
+    }
+  
+    window.addEventListener("DOMContentLoaded", loadHomepageData);
   </script>
+  
 
 </body>
 </html>
