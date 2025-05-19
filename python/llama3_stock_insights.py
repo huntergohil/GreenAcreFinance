@@ -58,15 +58,20 @@ def call_ollama(prompt):
     output = result.stdout.decode("utf-8")
     return output
 
+import json
+import re
+
 def extract_json_blocks(text):
     try:
-        # Clean common markdown-style wrapper
+        # Remove any markdown or intro text
         if "```" in text:
-            parts = text.split("```")
-            text = parts[1].strip() if len(parts) > 1 else text
-
-        # Remove "Here is the JSON object:" if it appears
-        text = text.replace("Here is the JSON object:", "").strip()
+            text = text.split("```")[1].strip()
+        if "Here is the JSON" in text:
+            text = text.split("Here is the JSON")[-1].strip()
+        if not text.startswith("{"):
+            match = re.search(r"\{.*\}", text, re.DOTALL)
+            if match:
+                text = match.group(0)
 
         data = json.loads(text)
         return {
@@ -77,8 +82,9 @@ def extract_json_blocks(text):
 
     except json.JSONDecodeError as e:
         print("JSON parsing failed.\n")
-        print(text)
+        print("RAW response:\n", text)
         return {}
+
 
 
 def main():
