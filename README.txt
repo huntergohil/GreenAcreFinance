@@ -38,3 +38,7 @@ Instructions for use:
 1. run webscrape.py. This gets the latest news stories for the AI. 
 2. Trim news_headlines.json. Llama3 is incapable of running such a large file. Eventually, this will be upgraded to cut out this trimming. 
 3. run llama3_stock_insights.py. This runs the AI analysis 
+
+Common issues:
+Bug with AI: Ollama often gives its responses with headers such as "Here is your list"
+Remediation: Extract JSON blocks function should clean this up, but will require further testing 
