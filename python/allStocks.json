@@ -2,14 +2,14 @@
   {
     "ticker": "NVDA",
     "forecast": "+2.8%",
-    "sentiment": "neutral",
-    "recommendation": "Hold"
+    "sentiment": "bullish",
+    "recommendation": "Strong Buy"
   },
   {
     "ticker": "FL",
-    "forecast": "-1.5%",
-    "sentiment": "bearish",
-    "recommendation": "Sell"
+    "forecast": "+1.4%",
+    "sentiment": "neutral",
+    "recommendation": "Buy"
   },
   {
     "ticker": "AAPL",
@@ -19,14 +19,14 @@
   },
   {
     "ticker": "TSLA",
-    "forecast": "-2.1%",
+    "forecast": "+2.1%",
     "sentiment": "neutral",
-    "recommendation": "Hold"
+    "recommendation": "Buy"
   },
   {
     "ticker": "UNH",
-    "forecast": "+3.5%",
-    "sentiment": "bullish",
-    "recommendation": "Buy"
+    "forecast": "-0.5%",
+    "sentiment": "bearish",
+    "recommendation": "Hold"
   }
 ]
