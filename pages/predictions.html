@@ -22,22 +22,43 @@
 
 <!-- Prediction Content -->
 <section class="section">
-  <h2>
-    📜 In the event that this bill is passed, 
-    <a href="https://example.com/article-on-bill-passing" target="_blank" class="highlight">
-      The American Innovation & Tech Act
-    </a>,
-    AAPL is predicted to <strong>rise significantly</strong>.
-  </h2>
-  <p>
-    Our AI projects an <strong>8–12%</strong> increase in AAPL’s value over the next 7 days, 
-    driven by confidence in tech-sector funding and market optimism.
-  </p>
+  <div id="prediction-container">
+    <h2>AI-Generated Market Predictions</h2>
+    <!-- Predictions will be injected here -->
+  </div>
 
   <div style="text-align: center; margin-top: 2em;">
-    <a href="stocks.html" class="btn">ACT NOW</a>
+    <a href="stocks.html" class="act-now-button">🚀 Act Now</a>
   </div>
 </section>
 
+<script>
+  fetch('../python/marketPredictions.json')
+    .then(res => res.json())
+    .then(data => {
+      const container = document.getElementById('prediction-container');
+  
+      data.forEach(pred => {
+        const block = document.createElement('div');
+        block.className = 'prediction-block';
+        block.style.marginBottom = '2em';
+        block.innerHTML = `
+          <p style="line-height: 1.6;">
+            <a href="${pred.link}" target="_blank" class="highlight">${pred.headline}</a>,<br>
+            <strong>${pred.prediction}</strong>
+          </p>
+          <hr style="margin-top: 1.5em;" />
+        `;
+        container.appendChild(block);
+      });
+    })
+    .catch(error => {
+      console.error("Error loading predictions:", error);
+      document.getElementById('prediction-container').innerHTML =
+        '<p>Unable to load predictions at this time.</p>';
+    });
+  </script>
+  
+  
 </body>
 </html>

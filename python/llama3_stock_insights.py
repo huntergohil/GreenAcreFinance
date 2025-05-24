@@ -86,6 +86,76 @@ def extract_json_blocks(text):
         return {}
 
 
+def generate_predictions(top_stories, top_stocks, all_stocks):
+    import subprocess
+import re
+import json
+
+def extract_json_array_block(text):
+    """
+    Extracts the first full JSON array from a messy AI response.
+    """
+    try:
+        # Look for the first [ ... ] array block
+        match = re.search(r"\[\s*{[\s\S]*?}\s*]", text)
+        if match:
+            return json.loads(match.group(0))
+    except Exception as e:
+        print("❌ Still failed to extract JSON array.")
+        print(text)
+        return None
+
+def generate_predictions(top_stories, top_stocks, all_stocks):
+    import subprocess
+
+    prompt = f"""
+You are a financial market analyst AI.
+
+Given:
+- Top news stories (title + link)
+- Recommended stocks
+- All S&P 500 sentiment
+
+Create a JSON array of 3–5 predictions in this format:
+[
+  {{
+    "headline": "...",
+    "link": "...",
+    "prediction": "In the event that [headline], [TICKER] will rise/fall because [reason]."
+  }}
+]
+
+Only output JSON. No markdown. No closing notes. No comments.
+
+Top Stories:
+{json.dumps(top_stories, indent=2)}
+
+Top Stocks:
+{json.dumps(top_stocks, indent=2)}
+
+All Stocks:
+{json.dumps(all_stocks, indent=2)}
+"""
+
+    result = subprocess.run(
+        ["ollama", "run", "llama3"],
+        input=prompt.encode("utf-8"),
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE
+    )
+
+    output = result.stdout.decode("utf-8").strip()
+
+    predictions = extract_json_array_block(output)
+    if predictions:
+        with open("marketPredictions.json", "w") as f:
+            json.dump(predictions, f, indent=2)
+        print("✅ Wrote marketPredictions.json")
+    else:
+        print("❌ Failed to parse predictions block:")
+        print(output)
+
+
 
 def main():
     headlines = load_json("news_headlines.json")
@@ -99,6 +169,19 @@ def main():
         with open(filename, "w") as f:
             json.dump(data, f, indent=2)
         print(f"Wrote: {filename}")
+        if (
+        "topStories.json" in blocks and
+        "topStocks.json" in blocks and
+        "allStocks.json" in blocks
+    ):
+            generate_predictions(
+            blocks["topStories.json"],
+            blocks["topStocks.json"],
+            blocks["allStocks.json"]
+        )
+
 
 if __name__ == "__main__":
     main()
+
+    
